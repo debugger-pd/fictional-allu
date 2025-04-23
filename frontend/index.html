@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Government & Private Schemes</title>
+  <link rel="stylesheet" href="/css/style1.css">
+</head>
+<body>
+  <!-- HEADER WITH HAMBURGER MENU -->
+  <header>
+    <h1>Government & Private Schemes</h1>
+    <div class="hamburger" id="hamburger">
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="dropdown-menu" id="dropdownMenu">
+      <button onclick="editProfile()">Edit Profile</button>
+      <!-- <button onclick="interestedFields()">Interested Fields</button> -->
+      <!-- <button onclick="settings()">Setting</button> -->
+      <button onclick="logout()">Log Out</button>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <h1>Unlock Opportunities</h1>
+    <p>Government & Private Schemes & Scholarships at Your Fingertips.</p>
+    <button onclick=' window.location.href = "explore.html"' class="cta-btn">Explore Now</button>
+  </section>
+
+  <!-- FEATURED SCHEMES -->
+  <section class="featured-section">
+    <h2>Featured Schemes & Scholarships</h2>
+    <div class="card-grid">
+      <div class="card">
+        <img src="assets/ChatGPT Image Apr 19, 2025, 03_11_38 PM.png" alt="Scheme Image">
+        <div class="card-content">
+          <h3>Government Initiatives</h3>
+          <p>Access financial aid and resources directly from government institutions to support your career and education.</p>
+          <button class="apply-btn "onclick="window.location.href ='government.html'">Apply button</button>
+
+        </div>
+      </div>
+      <div class="card">
+        <img src="assets/private.png" alt="Scheme Image">
+        <div class="card-content">
+          <h3>Private Funding</h3>
+          <p>Get exclusive scholarships and funding from private organizations to fulfill your educational dreams.</p>
+          <button class="apply-btn "onclick="window.location.href ='private.html'">Apply button</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="assets/coll.jpg" alt="Scheme Image">
+        <div class="card-content">
+        , <h3>Collaborative Programs</h3>
+          <p>Discover schemes where government and private sectors collaborate to offer the best opportunities.</p>
+          <button class="apply-btn "onclick="window.location.href ='collaborative.html'">Apply button</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUCCESS STORIES -->
+  <section class="success-stories">
+    <h2>Success Stories</h2>
+    <div class="slider-container">
+      <div class="slide active">
+        <p><strong>John D.</strong> – “I got the scholarship that changed my life and helped me finish my education!”</p>
+      </div>
+      <div class="slide">
+        <p><strong>Mary K.</strong> – “The business grant I found here allowed me to expand my startup.”</p>
+      </div>
+      <div class="slide">
+        <p><strong>Raj P.</strong> – “The farmer scheme provided essential support to upgrade my farming techniques.”</p>
+      </div>
+    </div>
+    <div class="slider-controls">
+      <button onclick="showSlide(0)">1</button>
+      <button onclick="showSlide(1)">2</button>
+      <button onclick="showSlide(2)">3</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="newsletter">
+      <input type="email" placeholder="Enter your email" />
+      <button>Subscribe</button>
+    </div>
+    <p>&copy; 2025 Your Website Name. All rights reserved.</p>
+    <p>Follow us on social media: [Icons or links]</p>
+  </footer>
+
+  <!-- Include slider script if needed -->
+  <script src="/js/script1.js"></script>
+  <script>
+    // Dropdown/hamburger functionality.
+    const hamburger = document.getElementById('hamburger');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    hamburger.addEventListener('click', () => {
+      dropdownMenu.classList.toggle('active');
+      hamburger.classList.toggle('open');
+    });
+
+    // Dummy functions for dropdown options.
+    function editProfile() { window.location.href = "edit_profile.html";
+  }
+    // function interestedFields() { alert('Interested Fields clicked'); }
+    // function settings() { alert('Settings clicked'); }
+    
+    // Logout function: clears session and redirects to login.
+    function logout(){
+      sessionStorage.removeItem('authToken');
+      window.location.href = 'login.html';
+    }
+  </script>
+</body>
+</html>

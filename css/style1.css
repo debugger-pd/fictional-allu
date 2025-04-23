@@ -1,0 +1,278 @@
+/* ======================== 
+   Global & RESET
+   ======================== */
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5faff;
+    color: #333;
+  }
+  
+  /* ======================== 
+     HEADER WITH HAMBURGER MENU
+     ======================== */
+  header {
+    background: linear-gradient(to right, #438798, #42c5a6);
+    color: #fff;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+  }
+  header h1 {
+    font-size: 1.6rem;
+  }
+  
+  /* Hamburger menu container */
+  .hamburger {
+    width: 30px;
+    height: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .hamburger .line {
+    display: block;
+    height: 3px;
+    background: #fff;
+    border-radius: 2px;
+    transition: all 0.4s ease;
+  }
+  .hamburger:hover .line {
+    background: #FFD700;
+  }
+  /* Hamburger open state */
+  .hamburger.open .line:nth-child(1) {
+    transform: translateY(11px) rotate(45deg);
+  }
+  .hamburger.open .line:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.open .line:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg);
+  }
+  
+  /* Dropdown menu */
+  .dropdown-menu {
+    position: fixed;
+    top: 70px;
+    right: 30px;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+  }
+  .dropdown-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .dropdown-menu button {
+    background: transparent;
+    border: none;
+    padding: 15px 20px;
+    text-align: left;
+    font-size: 16px;
+    color: #333;
+    width: 100%;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  .dropdown-menu button:hover {
+    background: #f0f0f0;
+  }
+  
+  /* ======================== 
+     HERO SECTION
+     ======================== */
+  .hero {
+    background: linear-gradient(135deg, #438798, #42c5a6);
+    color: #fff;
+    padding: 4rem 2rem;
+    text-align: center;
+    margin-top: 70px; /* Offset fixed header */
+  }
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  .hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero .cta-btn {
+    background-color: #FFC107;
+    color: #333;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .hero .cta-btn:hover {
+    background-color: #e0ac05;
+  }
+  
+  /* ======================== 
+     FEATURED SCHEMES
+     ======================== */
+  .featured-section {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  .featured-section h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .card-grid {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 300px;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  }
+  .card img {
+    width: 100%;
+    /* height: 150px; */
+    object-fit: cover;
+  }
+  .card-content {
+    padding: 1rem;
+  }
+  .card-content h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.2rem;
+  }
+  .card-content p {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 1rem;
+  }
+  .card-content .apply-btn {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .card-content .apply-btn:hover {
+    background-color: #006ae0;
+  }
+  
+  /* ======================== 
+     SUCCESS STORIES (SLIDER)
+     ======================== */
+  .success-stories {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  .success-stories h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  .slider-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    height: 200px;
+  }
+  .slide {
+    display: none;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  .slide.active {
+    display: block;
+  }
+  .slider-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .slider-controls button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    margin: 0 0.5rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  /* ======================== 
+     FOOTER
+     ======================== */
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 2rem;
+    text-align: center;
+    margin-top: 3rem;
+  }
+  footer .newsletter {
+    margin-bottom: 1rem;
+  }
+  footer .newsletter input {
+    padding: 0.6rem;
+    border-radius: 4px;
+    border: none;
+    margin-right: 0.5rem;
+    width: 200px;
+  }
+  footer .newsletter button {
+    padding: 0.6rem 1rem;
+    border-radius: 4px;
+    border: none;
+    background-color: #FFC107;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  footer .newsletter button:hover {
+    background-color: #e0ac05;
+  }
+  footer p {
+    margin: 0.5rem 0 0;
+    font-size: 0.9rem;
+  }
+  

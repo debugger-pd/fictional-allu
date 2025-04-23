@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="../css/style1.css" />
+    <style>
+        .style {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(135deg, #438798, #42c5a6);
+        }
+
+
+
+
+        .profile-container {
+            border: 4px solid #aeec85;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            min-width: 500px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto 20px;
+            
+            /* Border color */
+            background: linear-gradient(135deg, #438798, #42c5a6);
+            /* Background color */
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select,
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #43ac40;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .btn {
+            width: 48%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="style"></div>
+    <div class="profile-container">
+        <h2 style="text-align:center">Edit Your Profile</h2>
+
+        <img id="profileImage" src="default-avatar.png" alt="assets/profile.png" onerror="this.onerror=null; this.src='assets/profile.png';" class="profile-pic" />
+
+        <div class="form-group">
+            <label for="imageUpload">Change Profile Picture:</label>
+            <input type="file" id="imageUpload" accept="image/*">
+        </div>
+
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Enter your name" />
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Enter your email" />
+        </div>
+
+        <div class="form-group">
+            <label for="interests">Interests:</label>
+            <select id="interests" multiple>
+                <option>Technology</option>
+                <option>Art</option>
+                <option>Music</option>
+                <option>Gaming</option>
+                <option>Sports</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Change Password:</label>
+            <input type="password" id="password" placeholder="Enter new password" />
+        </div>
+
+        <div class="btn-group">
+            <button class="btn" onclick="saveProfile()">Save</button>
+            <button class="btn cancelbtn">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        const imageUpload = document.getElementById('imageUpload');
+        const profileImage = document.getElementById('profileImage');
+
+        imageUpload.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    profileImage.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function saveProfile() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const interests = Array.from(document.getElementById('interests').selectedOptions).map(option => option.value);
+
+            alert(`Name: ${name}\nEmail: ${email}\nInterests: ${interests.join(', ')}\nPassword: ${password}`);
+            // Add actual save functionality or backend API call here
+            window.location.href = "index.html";
+
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+/* Import font for stylish text */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* Global Settings */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: url('/frontend/assets/loginbg.png.png') no-repeat center/cover;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* Container with perspective for 3D effect */
+.container {
+  perspective: 1500px;
+}
+
+/* Button Group for toggling forms */
+.button-group {
+  margin-bottom: 20px;
+}
+#loginBtn, #signupBtn {
+ 
+
+
+
+
+  /* border: 2px solid #f4faf9; neon green border */
+  color: #47645e;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 0 10px;
+  transition: background 0.3s ease;
+}
+#loginBtn:hover, #signupBtn:hover {
+  background: rgba(57, 255, 20, 0.1);
+}
+
+/* Card Styles for Login/Sign Up */
+.card {
+  width: 320px;
+  height: 400px;
+  margin: 0 auto;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+  border: 2px solid #097080;
+  border-radius: 15px;
+  box-shadow: 0 20px 30px rgba(5, 83, 101, 0);
+}
+
+/* Card Faces */
+.card .face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #ece9e6;
+  border-radius: 15px;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: #47645e;
+  text-shadow: 0 0 10px #b409a278;
+  transition: transform 0.8s ease;
+}
+.card .face.front {
+  /* Front face remains normal */
+}
+.card .face.back {
+  transform: rotateY(-180deg);
+}
+
+/* Input Styles */
+input {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+}
+
+/* Button Styles */
+button {
+  background: #82d2d2;
+  color: #097cba;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+button:hover {
+  background: #45fddf;
+}
+
+/* Neon Glow on Headings */
+/* h2 {
+  animation: neon 1.5s infinite alternate;
+} */
+
+/* Keyframes for neon glow effect */
+/* @keyframes neon { */ 
+  /* 0%, 100% { text-shadow: 0 0 5px #ff14d0, 0 0 10px #75034f, 0 0 15px #ff14d854; }
+  50% { text-shadow: 0 0 10px #f714ff, 0 0 20px #6b035a, 0 0 30px #890781; }
+} */
+/*  */

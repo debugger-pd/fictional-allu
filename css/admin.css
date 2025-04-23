@@ -1,0 +1,238 @@
+/* admin.css - Refined Admin Page Styles with Card-Style Inputs */
+
+/* Global Reset & Font */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #e0f7fa, #e1f5fe);
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+header {
+  background: linear-gradient(90deg, #00838f, #00acc1);
+  color: #fff;
+  padding: 1.5rem 0;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+header h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+/* Main Container */
+.admin-container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 2rem;
+  padding: 2rem;
+  flex-grow: 1;
+}
+
+/* Sidebar */
+.sidebar {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  height: fit-content;
+  animation: fadeInUp 0.6s ease-in-out both;
+}
+.sidebar nav ul {
+  list-style: none;
+}
+.sidebar nav ul li {
+  margin-bottom: 1rem;
+}
+.sidebar nav ul li a {
+  color: #00838f;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+.sidebar nav ul li a:hover {
+  color: #00acc1;
+}
+
+/* Dashboard Cards */
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+}
+.admin-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+}
+.admin-card:hover {
+  transform: translateY(-8px) rotateX(1deg);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+}
+.admin-card h3 {
+  color: #00796b;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+.admin-card p {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Table Container */
+.table-container {
+  overflow-x: auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  animation: fadeInUp 0.6s ease-in-out both;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+th {
+  background: #f0f4f5;
+  color: #00796b;
+  font-weight: 600;
+}
+tr:hover {
+  background: #fafafb;
+}
+
+/* Form Section & Card-Style Inputs */
+.form-section {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  animation: fadeInUp 0.6s ease-in-out both;
+}
+.form-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #00796b;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 1.2rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  background: #fff;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  box-shadow: 0 6px 20px rgba(0, 172, 193, 0.25);
+}
+/* Placeholder styling */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #999;
+  opacity: 1;
+}
+/* Floating icon inside inputs (if needed) */
+.form-group .input-icon {
+  position: absolute;
+  right: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 1.2rem;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.6rem;
+  background: #00acc1;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background 0.3s, transform 0.2s;
+}
+.btn:hover {
+  background: #00838f;
+  transform: translateY(-2px);
+}
+.btn-secondary {
+  background: #f0f4f5;
+  color: #00796b;
+}
+.btn-secondary:hover {
+  background: #e1f5fe;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #eceff1;
+  font-size: 0.9rem;
+  color: #666;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+}
+
+/* Fade-in Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .admin-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar {
+    margin-bottom: 2rem;
+  }
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login & Sign Up</title>
+  <link rel="stylesheet" href="/css/login.css" />
+</head>
+<body>
+  
+  <div class="container">
+    <div class="button-group">
+      <button id="loginBtn">Login</button>
+      <button id="signupBtn">Sign Up</button>
+    </div>
+    <div class="card" id="card">
+      <div class="face front">
+        <h2>Login</h2>
+        <form id="loginForm" autocomplete="off">
+          <input type="email" name="email" placeholder="Email" autocomplete="off" required />
+          <input type="password" name="password" placeholder="Password" autocomplete="new-password" required />
+          <button type="submit">Login</button>
+        </form>
+        <p id="loginMsg"></p>
+      </div>
+      <div class="face back">
+        <h2>Sign Up</h2>
+        <form id="registerForm" autocomplete="off">
+          <input type="text" name="username" placeholder="Full Name" autocomplete="off" required />
+          <input type="email" name="email" placeholder="Email" autocomplete="off" required />
+          <input type="password" name="password" placeholder="Password" autocomplete="new-password" required />
+          <button type="submit">Register</button>
+        </form>
+        <p id="registerMsg"></p>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Clear forms on load to prevent cached data.
+    window.onload = function () {
+      document.getElementById('loginForm').reset();
+      document.getElementById('registerForm').reset();
+    };
+
+    // Card flip behavior with 3D touch
+    const card = document.getElementById('card');
+    const loginBtn = document.getElementById('loginBtn');
+    const signupBtn = document.getElementById('signupBtn');
+    let currentState = 'login';
+
+    signupBtn.addEventListener('mouseenter', () => {
+      if (currentState === 'login') card.style.transform = 'rotateY(-130deg)';
+    });
+    signupBtn.addEventListener('mouseleave', () => {
+      if (currentState === 'login') card.style.transform = 'rotateY(0deg)';
+    });
+    loginBtn.addEventListener('mouseenter', () => {
+      if (currentState === 'signup') card.style.transform = 'rotateY(-30deg)';
+    });
+    loginBtn.addEventListener('mouseleave', () => {
+      if (currentState === 'signup') card.style.transform = 'rotateY(-180deg)';
+    });
+    signupBtn.addEventListener('click', () => {
+      card.style.transform = 'rotateY(-180deg)';
+      currentState = 'signup';
+    });
+    loginBtn.addEventListener('click', () => {
+      card.style.transform = 'rotateY(0deg)';
+      currentState = 'login';
+    });
+
+    // Backend URL for authentication
+    const backendURL = 'http://localhost:5000/api/auth';
+
+    // Handle login form submission
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const credentials = Object.fromEntries(formData.entries());
+      try {
+        const res = await fetch(`${backendURL}/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(credentials)
+        });
+        const result = await res.json();
+        if (res.ok && result.token) {
+          // Save token in sessionStorage (cleared when the tab closes)
+          sessionStorage.setItem('authToken', result.token);
+          // Redirect based on role: admin to admin.html, user to index.html
+          if (result.role === 'admin') {
+            window.location.href = 'admin.html';
+          } else {
+            window.location.href = 'index.html';
+          }
+        } else {
+          document.getElementById('loginMsg').textContent = result.msg || 'Login failed';
+        }
+      } catch (err) {
+        console.error(err);
+        document.getElementById('loginMsg').textContent = 'Error during login';
+      }
+    });
+
+    // Handle registration form submission
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData.entries());
+      try {
+        const res = await fetch(`${backendURL}/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const result = await res.json();
+        if (res.ok) {
+          document.getElementById('registerMsg').textContent = 'Registration successful! Please log in.';
+          // Flip card back to login view
+          card.style.transform = 'rotateY(0deg)';
+          currentState = 'login';
+        } else {
+          document.getElementById('registerMsg').textContent = result.msg || 'Registration failed';
+        }
+      } catch (err) {
+        console.error(err);
+        document.getElementById('registerMsg').textContent = 'Error during registration';
+      }
+    });
+  </script>
+</body>
+</html>

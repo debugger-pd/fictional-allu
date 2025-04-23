@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+  <!-- HEADER WITH HAMBURGER MENU (shared by all pages if needed) -->
+  <header>
+    <h1>Government & Private Schemes</h1>
+    <div class="hamburger" id="hamburger">
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </div>
+    <div class="dropdown-menu" id="dropdownMenu">
+      <button onclick="editProfile()">Edit Profile</button>
+      <button onclick="interestedFields()">Interested Fields</button>
+      <button onclick="settings()">Setting</button>
+      <button onclick="logout()">Log Out</button>
+    </div>
+  </header>
+
+  <div class="container" id="dashboardContainer">
+    <h2>Admin Panel</h2>
+    <!-- Section to Add a New Scheme with Filter Attributes -->
+    <section id="add-scheme">
+      <h3>Add New Scheme</h3>
+      <form id="schemeForm">
+        <input type="text" name="title" placeholder="Scheme Title" required>
+        <textarea name="description" placeholder="Description"></textarea>
+        <select name="type" required>
+          <option value="">Select Type</option>
+          <option value="government">Government</option>
+          <option value="private">Private</option>
+        </select>
+        <input type="url" name="link" placeholder="Scheme Link" required>
+        <!-- Extra fields for filters -->
+        <input type="text" name="category" placeholder="Category (e.g. Education, Business)" >
+        <input type="text" name="region" placeholder="Region (e.g. North, South)" >
+        <input type="text" name="benefits" placeholder="Benefits (e.g. Financial Aid)" >
+        <input type="text" name="state" placeholder="State" >
+        <input type="text" name="gender" placeholder="Gender (if applicable)" >
+        <input type="text" name="ageRange" placeholder="Age Range (e.g. 18-25)" >
+        <input type="text" name="caste" placeholder="Caste" >
+        <input type="text" name="ministry" placeholder="Ministry Name" >
+        <input type="text" name="residence" placeholder="Residence (Urban/Rural)" >
+        <input type="text" name="minority" placeholder="Minority (Yes/No)" >
+        <input type="text" name="differentlyAbled" placeholder="Differently Abled (Yes/No)" >
+        <input type="text" name="dbt" placeholder="DBT Scheme (Yes/No)" >
+        <input type="text" name="disabilityPercentage" placeholder="Disability Percentage" >
+        <button type="submit">Add Scheme</button>
+      </form>
+      <p id="schemeMsg"></p>
+    </section>
+
+    <!-- Section to List Existing Schemes -->
+    <section id="list-schemes">
+      <h3>Existing Schemes</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Category</th>
+            <th>Region</th>
+            <th>Benefits</th>
+            <th>State</th>
+            <th>Other Info</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="schemesTableBody">
+          <!-- Schemes will be dynamically loaded here -->
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <script>
+    // Hamburger menu functionality.
+    const hamburger = document.getElementById('hamburger');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    hamburger.addEventListener('click', () => {
+      dropdownMenu.classList.toggle('active');
+      hamburger.classList.toggle('open');
+    });
+
+    // Dummy functions for dropdown options.
+    function editProfile() { alert('Edit Profile clicked'); }
+    function interestedFields() { alert('Interested Fields clicked'); }
+    function settings() { alert('Settings clicked'); }
+    function logout() {
+      sessionStorage.removeItem('authToken');
+      window.location.href = 'login.html';
+    }
+
+    // Scheme management: fetch, render, add, edit, delete.
+    const schemesApiUrl = 'http://localhost:5000/api/schemes';
+    const token = sessionStorage.getItem('authToken');
+    if (!token) { window.location.href = 'login.html'; }
+
+    async function loadSchemes() {
+      try {
+        const res = await fetch(schemesApiUrl, {
+          headers: { 'Authorization': 'Bearer ' + token }
+        });
+        const schemes = await res.json();
+        const tbody = document.getElementById('schemesTableBody');
+        tbody.innerHTML = '';
+        schemes.forEach(scheme => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${scheme.title}</td>
+            <td>${scheme.type}</td>
+            <td>${scheme.category || 'N/A'}</td>
+            <td>${scheme.region || 'N/A'}</td>
+            <td>${scheme.benefits || 'N/A'}</td>
+            <td>${scheme.state || 'N/A'}</td>
+            <td>
+              Gender: ${scheme.gender || 'N/A'}<br>
+              Age: ${scheme.ageRange || 'N/A'}<br>
+              Caste: ${scheme.caste || 'N/A'}<br>
+              Ministry: ${scheme.ministry || 'N/A'}<br>
+              Residence: ${scheme.residence || 'N/A'}<br>
+              Minority: ${scheme.minority || 'N/A'}<br>
+              DA: ${scheme.differentlyAbled || 'N/A'}<br>
+              DBT: ${scheme.dbt || 'N/A'}<br>
+              Disability%: ${scheme.disabilityPercentage || 'N/A'}
+            </td>
+            <td>
+              <button onclick="deleteScheme('${scheme._id}')">Delete</button>
+              <button onclick="editSchemePrompt('${scheme._id}', '${scheme.title}', '${scheme.type}')">Edit</button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } catch (err) {
+        console.error('Error fetching schemes:', err);
+      }
+    }
+
+    document.getElementById('schemeForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const schemeData = Object.fromEntries(formData.entries());
+      try {
+        const res = await fetch(schemesApiUrl + '/add', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+          body: JSON.stringify(schemeData)
+        });
+        const result = await res.json();
+        document.getElementById('schemeMsg').textContent = result.message || 'Failed to add scheme';
+        loadSchemes();
+      } catch (err) {
+        console.error(err);
+      }
+    });
+
+    async function deleteScheme(id) {
+      if (!confirm("Are you sure you want to delete this scheme?")) return;
+      try {
+        const res = await fetch(schemesApiUrl + '/' + id, {
+          method: 'DELETE',
+          headers: { 'Authorization': 'Bearer ' + token }
+        });
+        const result = await res.json();
+        alert(result.message || 'Scheme deleted');
+        loadSchemes();
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    // A simple prompt for editing (for demo purposes)
+    async function editSchemePrompt(id, title, type) {
+      const newTitle = prompt("Edit Title:", title);
+      if (!newTitle) return;
+      // For simplicity, we update only the title.
+      try {
+        const res = await fetch(schemesApiUrl + '/' + id, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+          body: JSON.stringify({ title: newTitle })
+        });
+        const result = await res.json();
+        alert(result.message || 'Scheme updated');
+        loadSchemes();
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    window.onload = loadSchemes;
+  </script>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>collaborative Schemes</title>
+  <link rel="stylesheet" href="/css/schemes-with-left-filters.css" />
+  <script defer src="/js/schemes-with-left-filters.js"></script>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <nav>
+      <h1>collaborative Schemes</h1>
+      <ul>
+        <li><a href="#"onclick="window.location.href ='index.html'">Home</a></li>
+        <li><a href="#"onclick="window.location.href ='private.html'">government Schemes</a></li>
+        <li><a href="#"onclick="window.location.href ='private.html'">Private Schemes</a></li>
+        <li><a href="#"onclick="window.location.href ='collaborative.html'">Scholarships</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- SEARCH BAR -->
+  <div class="search-container">
+    <input type="text" id="searchInput" class="search-bar" placeholder="Search schemes by name...">
+    <button class="search-button">🔍</button>
+  </div>
+
+  <!-- MAIN WRAPPER: Sidebar (left) + Schemes (right) -->
+  <main>
+    <!-- FILTER SIDEBAR -->
+    <aside class="filter-sidebar">
+      <div class="sidebar-header">
+        <a href="#" class="back-link">&larr; Back</a>
+        <h2>Filter By</h2>
+        <a href="#" class="reset-filters">Reset Filters</a>
+      </div>
+
+      <!-- Filter Group: Search Schemes (optional duplicate) -->
+      <div class="filter-group">
+        <div class="filter-header">
+          <span>Search Schemes</span>
+          <button class="toggle-filter">+</button>
+        </div>
+        <div class="filter-content">
+          <input type="text" id="searchInputSide" placeholder="Search by name..." />
+        </div>
+      </div>
+
+      <!-- Filter Group: Category -->
+      <div class="filter-group">
+        <div class="filter-header">
+          <span>Category</span>
+          <button class="toggle-filter">+</button>
+        </div>
+        <div class="filter-content">
+          <ul class="filter-options" data-filter="category">
+            <li data-value="all">All</li>
+            <li data-value="education">Education</li>
+            <li data-value="business">Business</li>
+            <li data-value="health">Health</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Filter Group: Region -->
+      <div class="filter-group">
+        <div class="filter-header">
+          <span>Region</span>
+          <button class="toggle-filter">+</button>
+        </div>
+        <div class="filter-content">
+          <ul class="filter-options" data-filter="region">
+            <li data-value="all">All</li>
+            <li data-value="north">North</li>
+            <li data-value="south">South</li>
+            <li data-value="east">East</li>
+            <li data-value="west">West</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Filter Group: Benefits -->
+      <div class="filter-group">
+        <div class="filter-header">
+          <span>Benefits</span>
+          <button class="toggle-filter">+</button>
+        </div>
+        <div class="filter-content">
+          <ul class="filter-options" data-filter="benefits">
+            <li data-value="all">All</li>
+            <li data-value="financial">Financial Aid</li>
+            <li data-value="subsidy">Subsidy</li>
+            <li data-value="training">Training</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Filter Group: State -->
+      <div class="filter-group">
+        <div class="filter-header">
+          <span>State</span>
+          <button class="toggle-filter">+</button>
+        </div>
+        <div class="filter-content">
+          <ul class="filter-options" data-filter="state">
+            <li data-value="all">Select</li>
+            <li data-value="state1">State 1</li>
+            <li data-value="state2">State 2</li>
+            <li data-value="state3">State 3</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Filter Group: Gender -->
+      <div class="filter-group">
+        <div class="filter-header">
+          <span>Gender</span>
+          <button class="toggle-filter">+</button>
+        </div>
+        <div class="filter-content">
+          <ul class="filter-options" data-filter="gender">
+            <li data-value="all">Select</li>
+            <li data-value="male">Male</li>
+            <li data-value="female">Female</li>
+            <li data-value="other">Other</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Filter Group: Age -->
+      <div class="filter-group">
+        <div class="filter-header">
+          <span>Age</span>
+          <button class="toggle-filter">+</button>
+        </div>
+        <div class="filter-content">
+          <ul class="filter-options" data-filter="age">
+            <li data-value="all">Select</li>
+            <li data-value="child">Under 18</li>
+            <li data-value="adult">18-60</li>
+            <li data-value="senior">60+</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Filter Group: Caste -->
+      <div class="filter-group">
+        <div class="filter-header">
+          <span>Caste</span>
+          <button class="toggle-filter">+</button>
+        </div>
+        <div class="filter-content">
+          <ul class="filter-options" data-filter="caste">
+            <li data-value="all">Select</li>
+            <li data-value="general">General</li>
+            <li data-value="obc">OBC</li>
+            <li data-value="scst">SC/ST</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Filter Group: Ministry Name -->
+      <div class="filter-group">
+        <div class="filter-header">
+          <span>Ministry Name</span>
+          <button class="toggle-filter">+</button>
+        </div>
+        <div class="filter-content">
+          <ul class="filter-options" data-filter="ministry">
+            <li data-value="all">Select</li>
+            <li data-value="agriculture">Ministry of Agriculture</li>
+            <li data-value="education">Ministry of Education</li>
+            <li data-value="health">Ministry of Health</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Filter Group: Residence -->
+      <div class="filter-group">
+        <div class="filter-header">
+          <span>Residence</span>
+          <button class="toggle-filter">+</button>
+        </div>
+        <div class="filter-content">
+          <ul class="filter-options" data-filter="residence">
+            <li data-value="all">Select</li>
+            <li data-value="rural">Rural</li>
+            <li data-value="urban">Urban</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Filter Group: Minority -->
+      <div class="filter-group">
+        <div class="filter-header">
+          <span>Minority</span>
+          <button class="toggle-filter">+</button>
+        </div>
+        <div class="filter-content">
+          <ul class="filter-options" data-filter="minority">
+            <li data-value="all">Select</li>
+            <li data-value="yes">Yes</li>
+            <li data-value="no">No</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Filter Group: Differently Abled -->
+      <div class="filter-group">
+        <div class="filter-header">
+          <span>Differently Abled</span>
+          <button class="toggle-filter">+</button>
+        </div>
+        <div class="filter-content">
+          <ul class="filter-options" data-filter="disabled">
+            <li data-value="all">Select</li>
+            <li data-value="yes">Yes</li>
+            <li data-value="no">No</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Filter Group: DBT Scheme -->
+      <div class="filter-group">
+        <div class="filter-header">
+          <span>DBT Scheme</span>
+          <button class="toggle-filter">+</button>
+        </div>
+        <div class="filter-content">
+          <ul class="filter-options" data-filter="dbt">
+            <li data-value="all">Select</li>
+            <li data-value="yes">Yes</li>
+            <li data-value="no">No</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Filter Group: Disability Percentage -->
+      <div class="filter-group">
+        <div class="filter-header">
+          <span>Disability Percentage</span>
+          <button class="toggle-filter">+</button>
+        </div>
+        <div class="filter-content">
+          <ul class="filter-options" data-filter="disability">
+            <li data-value="all">Select</li>
+            <li data-value="less50">Less than 50%</li>
+            <li data-value="more50">50% and above</li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- SCHEMES SECTION (List View) -->
+    <section class="schemes-section">
+      <ul class="schemes-list">
+        <!-- Sample scheme item 1 -->
+        <li class="scheme-item"
+            data-category="education"
+            data-region="north"
+            data-benefits="financial"
+            data-state="state1"
+            data-gender="all"
+            data-age="adult"
+            data-caste="general"
+            data-ministry="education"
+            data-residence="urban"
+            data-minority="no"
+            data-disabled="no"
+            data-dbt="yes"
+            data-disability="less50">
+          <h3>Education Scheme A</h3>
+          <p>Details about Education Scheme A.</p>
+          <button class="read-more">Read More</button>
+        </li>
+
+        <!-- Sample scheme item 2 -->
+        <li class="scheme-item"
+            data-category="business"
+            data-region="south"
+            data-benefits="subsidy"
+            data-state="state2"
+            data-gender="all"
+            data-age="adult"
+            data-caste="obc"
+            data-ministry="agriculture"
+            data-residence="rural"
+            data-minority="no"
+            data-disabled="no"
+            data-dbt="no"
+            data-disability="more50">
+          <h3>Business Scheme B</h3>
+          <p>Details about Business Scheme B.</p>
+          <button class="read-more">Read More</button>
+        </li>
+
+        <!-- Sample scheme item 3 -->
+        <li class="scheme-item"
+            data-category="health"
+            data-region="east"
+            data-benefits="training"
+            data-state="state3"
+            data-gender="female"
+            data-age="senior"
+            data-caste="scst"
+            data-ministry="health"
+            data-residence="urban"
+            data-minority="yes"
+            data-disabled="yes"
+            data-dbt="yes"
+            data-disability="more50">
+          <h3>Health Scheme C</h3>
+          <p>Details about Health Scheme C.</p>
+          <button class="read-more">Read More</button>
+        </li>
+        <!-- Add additional scheme items as needed -->
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
